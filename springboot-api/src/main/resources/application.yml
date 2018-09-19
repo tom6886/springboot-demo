@@ -1,0 +1,34 @@
+server:
+    tomcat:
+        uri-encoding: UTF-8
+        max-threads: 1000
+        min-spare-threads: 30
+    port: 9099
+    servlet:
+        context-path: /demo
+
+spring:
+    profiles:
+        active: dev
+    servlet:
+        multipart:
+            max-file-size: 100MB
+            max-request-size: 100MB
+            enabled: true
+    redis:
+        database: 0
+        host: 192.168.10.10
+        port: 6379
+        password:
+        timeout: 6000ms
+        jedis:
+            pool:
+                max-active: 1000
+                max-wait: -1ms
+                max-idle: 10
+                min-idle: 5
+    devtools:
+        restart:
+            enabled: true
+
+fileRoot: D:\fileRoot\

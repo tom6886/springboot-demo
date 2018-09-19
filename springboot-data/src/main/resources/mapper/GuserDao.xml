@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="tb.springboot.data.dao.GuserDao">
+    <select id="queryPage" resultType="java.util.Map">
+        SELECT
+        a.id,
+        a.name,
+        a.age,
+        a.dept_id,
+        b.name as dept_name,
+        b.code as dept_code
+        FROM
+        guser a
+        left JOIN gdept b on a.dept_id = b.id
+
+        <if test="params.deptId != null and params.deptId.trim() != ''" >
+            and a.dept_id = #{params.deptId}
+        </if>
+        <choose>
+            <when test="params.orderBy != null and params.orderBy.trim() != ''">
+                order by ${params.orderBy} ${params.order}
+            </when>
+            <otherwise>
+                order by a.create_date desc
+            </otherwise>
+        </choose>
+    </select>
+</mapper>
